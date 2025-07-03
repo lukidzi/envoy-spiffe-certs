@@ -1,0 +1,15 @@
+[ req ]
+prompt = no
+distinguished_name = dn
+req_extensions = v3_req
+
+[ dn ]
+CN = my-service-client
+
+[ v3_req ]
+keyUsage = digitalSignature, keyEncipherment, keyAgreement
+extendedKeyUsage = clientAuth
+subjectAltName = @alt_names
+
+[ alt_names ]
+URI.1 = spiffe://example.org/ns/default/sa/server

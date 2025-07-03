@@ -1,0 +1,18 @@
+[ req ]
+prompt = no
+distinguished_name = dn
+req_extensions = v3_req
+
+[ dn ]
+CN = server.demo
+
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = digitalSignature, keyEncipherment, keyAgreement
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alt_names
+
+[ alt_names ]
+URI.1 = spiffe://demo/server
+URI.2 = kuma://kuma.io/zone/zone
+URI.3 = kuma://kuma.io/service/server
