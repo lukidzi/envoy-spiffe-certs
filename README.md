@@ -31,40 +31,41 @@ By default Envoy doesn't validate SAN/hash when only trustedBundle is set, and o
 
 ### Setup
 
-1. Enter certs
-2. Generate server cert
+1. Copy/Download Envoy bindary
+2. Enter certs
+3. Generate server cert
 ```bash
 openssl genrsa -out server.key 2048
 openssl req -new -key server.key -out server.csr -config server-san.cnf
 openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256 -extfile server-san.cnf -extensions v3_req
 ```
 
-3. Generate client cert
+4. Generate client cert
 ```bash
 openssl genrsa -out client.key 2048
 openssl req -new -key client.key -out client.csr -config client-san.cnf
 openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt -days 365 -sha256 -extfile client-san.cnf -extensions v3_req
 ```
 
-4. Generate client with different identities
+5. Generate client with different identities
 ```bash
 openssl genrsa -out client.key 2048
 openssl req -new -key client.key -out client.csr -config client-san.cnf
 openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt -days 365 -sha256 -extfile client-san.cnf -extensions v3_req
 ```
-5. Start server
+6. Start server
 ```bash
 ./envoy -c server.yaml -l debug
 ```
 
-6. Start client
+7. Start client
 ```bash
 ./envoy -c client.yaml -l debug
 ```
 
-7. Start client-new-identity
+8. Start client-new-identity
 ```bash
 ./envoy -c client-new-identity.yaml -l debug
 ```
 
-8. Do requests to 10000 and 10001 and request should succeed
+9. Do requests to 10000 and 10001 and request should succeed
